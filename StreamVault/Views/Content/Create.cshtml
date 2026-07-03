@@ -1,0 +1,22 @@
+﻿@model StreamVaultAdmin.ViewModels.ContentViewModel
+
+@{
+    ViewData["Title"] = "Create Content";
+}
+
+<h2>Create Content</h2>
+
+<hr />
+
+<form asp-action="Create" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <partial name="_ContentForm" model="Model" />
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
