@@ -2,8 +2,15 @@
 
 namespace StreamVaultAdmin.Data;
 
+// Provides sample data for the application when the database
+// is first created. This allows the application to be populated
+// with example content for testing and demonstration purposes.
 public static class SeedData
 {
+ 
+    // Seeds the database with sample content if no records already exist.
+    // <param name="context"></param>
+    // This method is called during application startup.
     public static void Initialize(AppDbContext context)
     {
         if (context.Contents.Any())
@@ -103,8 +110,9 @@ public static class SeedData
                 RecordLabel = "Albert Productions"
             }
         };
-
+        // Add to database
         context.Contents.AddRange(catalogue);
+        // Save changes to the database
         context.SaveChanges();
     }
 }

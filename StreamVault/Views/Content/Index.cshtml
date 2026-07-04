@@ -13,51 +13,46 @@
     </a>
 </div>
 
-<form asp-action="Index" method="get" class="mb-4">
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
 
-    <div class="row">
+        <form asp-action="Index" method="get">
 
-        <div class="col-md-5">
+            <div class="row g-3">
 
-            <input asp-for="SearchTerm"
-                   class="form-control"
-                   placeholder="Search by title..." />
+                <div class="col-md-5">
+                    <input asp-for="SearchTerm"
+                           class="form-control"
+                           placeholder="Search title..." />
+                </div>
 
-        </div>
+                <div class="col-md-3">
+                    <select asp-for="SelectedType"
+                            class="form-select"
+                            asp-items="Html.GetEnumSelectList<ContentType>()">
+                        <option value="">All Content Types</option>
+                    </select>
+                </div>
 
-        <div class="col-md-3">
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100">
+                        Search
+                    </button>
+                </div>
 
-            <select asp-for="SelectedType"
-                    class="form-select"
-                    asp-items="Html.GetEnumSelectList<ContentType>()">
+                <div class="col-md-2">
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary w-100">
+                        Clear
+                    </a>
+                </div>
 
-                <option value="">All Content Types</option>
+            </div>
 
-            </select>
-
-        </div>
-
-        <div class="col-md-2">
-
-            <button type="submit"
-                    class="btn btn-success w-100">
-                Search
-            </button>
-
-        </div>
-
-        <div class="col-md-2">
-
-            <a asp-action="Index"
-               class="btn btn-secondary w-100">
-                Clear
-            </a>
-
-        </div>
+        </form>
 
     </div>
-
-</form>
+</div>
 
 @if (!Model.Contents.Any())
 {
@@ -69,8 +64,7 @@
 }
 else
 {
-    <table class="table table-striped table-hover">
-
+    <table class="table table-hover table-bordered align-middle shadow-sm">
         <thead class="table-dark">
 
             <tr>
@@ -107,17 +101,17 @@ else
 
                     <td>@item.Summary</td>
 
-                    <td>
+                    <td class="text-center">
 
                         <a asp-action="Edit"
                            asp-route-id="@item.Id"
-                           class="btn btn-sm btn-warning">
+                           class="btn btn-warning btn-sm me-2">
                             Edit
                         </a>
 
                         <a asp-action="Delete"
                            asp-route-id="@item.Id"
-                           class="btn btn-sm btn-danger">
+                           class="btn btn-danger btn-sm">
                             Delete
                         </a>
 

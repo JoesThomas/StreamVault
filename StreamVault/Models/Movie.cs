@@ -2,6 +2,9 @@
 
 namespace StreamVaultAdmin.Models;
 
+// Represents a movie within the StreamVault catalogue.
+// Inherits common properties from the Content base class and
+// includes movie-specific information such as the director and duration.
 public class Movie : Content
 {
     [Range(1, 1000)]

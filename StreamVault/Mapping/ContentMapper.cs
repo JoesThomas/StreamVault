@@ -3,12 +3,18 @@ using StreamVaultAdmin.ViewModels;
 
 namespace StreamVaultAdmin.Mapping;
 
+// Provides methods to convert between domain models (Content)
+// and view models (ContentViewModel). This separates the data
+// stored in the database from the data displayed in the user interface.
 public static class ContentMapper
 {
+    // Converts a Content entity into a ContentViewModel
+    // for use in the application's views.
     public static ContentViewModel ToViewModel(Content content)
     {
         var vm = new ContentViewModel
         {
+            // Map the properties shared by all content types.
             Id = content.Id,
             Title = content.Title,
             Description = content.Description,
@@ -17,7 +23,7 @@ public static class ContentMapper
             AgeRating = content.AgeRating,
             SelectedType = content.ContentType
         };
-
+        // Map specific properties.
         switch (content)
         {
             case Movie movie:
@@ -46,8 +52,12 @@ public static class ContentMapper
         return vm;
     }
 
+    // Converts a ContentViewModel into the appropriate
+    // Content-derived entity ready to be stored in the database.
     public static Content ToEntity(ContentViewModel vm)
     {
+        // Create the correct derived content object based on
+        // the selected content type.
         return vm.SelectedType switch
         {
             ContentType.Movie => new Movie

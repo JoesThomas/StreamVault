@@ -1,4 +1,12 @@
-﻿<div class="mb-3">
+﻿@model StreamVaultAdmin.ViewModels.ContentViewModel
+
+<!--
+    Partial view containing the shared form used by both the
+    Create and Edit pages. The form captures common content
+    properties as well as fields specific to each content type.
+-->
+
+<div class="mb-3">
 
     <label asp-for="Title"></label>
 
@@ -8,13 +16,36 @@
 
 </div>
 <div class="mb-3">
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="ReleaseDate"></label>
+    <input asp-for="ReleaseDate" class="form-control" type="date" />
+    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Genre"></label>
+    <input asp-for="Genre" class="form-control" />
+    <span asp-validation-for="Genre" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="AgeRating"></label>
+    <input asp-for="AgeRating" class="form-control" />
+    <span asp-validation-for="AgeRating" class="text-danger"></span>
+</div>
+<div class="mb-3">
 
     <label asp-for="SelectedType"></label>
 
     <select asp-for="SelectedType"
-            asp-items="Html.GetEnumSelectList<ContentType>()"
             class="form-select"
-            id="contentType">
+            asp-items="Html.GetEnumSelectList<ContentType>()">
+        <option value="">All Content Types</option>
     </select>
 
 </div>
@@ -92,40 +123,46 @@
     </a>
 
 </div>
-const typeSelect = document.getElementById("contentType");
+<script>
+    // Get references to the content type dropdown and each
+    // section containing type-specific input fields.
+    const typeSelect = document.getElementById("contentType");
 
-const movie = document.getElementById("movieFields");
-const series = document.getElementById("seriesFields");
-const audio = document.getElementById("audiobookFields");
-const music = document.getElementById("musicFields");
+    const movie = document.getElementById("movieFields");
+    const series = document.getElementById("seriesFields");
+    const audio = document.getElementById("audiobookFields");
+    const music = document.getElementById("musicFields");
 
-function refresh() {
+    // Displays only the fields that correspond to the
+    // currently selected content type.
+    function refresh() {
 
-    movie.style.display = "none";
-    series.style.display = "none";
-    audio.style.display = "none";
-    music.style.display = "none";
+        movie.style.display = "none";
+        series.style.display = "none";
+        audio.style.display = "none";
+        music.style.display = "none";
 
-    switch(typeSelect.value){
+        // Show the appropriate section.
+        switch (typeSelect.value) {
+            case "Movie":
+                movie.style.display = "block";
+                break;
 
-        case "Movie":
-            movie.style.display = "block";
-            break;
+            case "Series":
+                series.style.display = "block";
+                break;
 
-        case "Series":
-            series.style.display = "block";
-            break;
+            case "Audiobook":
+                audio.style.display = "block";
+                break;
 
-        case "Audiobook":
-            audio.style.display = "block";
-            break;
-
-        case "MusicAlbum":
-            music.style.display = "block";
-            break;
+            case "MusicAlbum":
+                music.style.display = "block";
+                break;
+        }
     }
-}
 
-typeSelect.addEventListener("change", refresh);
-
-refresh();
+    typeSelect.addEventListener("change", refresh);
+    // Initialise the correct fields when the page loads.
+    refresh();
+</script>

@@ -2,6 +2,10 @@
 
 namespace StreamVaultAdmin.Models;
 
+// Represents a music album within the StreamVault catalogue.
+// Inherits common properties from the Content base class and
+// includes audiobook-specific information such as the artist,
+// trackCount and recordLabel.
 public class MusicAlbum : Content
 {
     [Required]

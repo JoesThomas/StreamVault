@@ -2,6 +2,9 @@
 
 namespace StreamVaultAdmin.Models;
 
+// Represents a series within the StreamVault catalogue.
+// Inherits common properties from the Content base class and
+// includes series-specific information such as the numberOfSeasons and totalEpisodes.
 public class Series : Content
 {
     [Range(1, 100)]
